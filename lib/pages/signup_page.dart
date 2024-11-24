@@ -161,13 +161,13 @@ class SignUpPage extends StatelessWidget {
                     onTap: () {
                       context.go('/signin');
                     },
-                    child: const Text(
-                      '',
-                      style: TextStyle(
-                        color: Color.fromARGB(255, 0, 102, 255),
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                    // child: const Text(
+                    //   '',
+                    //   style: TextStyle(
+                    //     color: Color.fromARGB(255, 0, 102, 255),
+                    //     fontWeight: FontWeight.bold,
+                    //   ),
+                    // ),
                   ),
                 ],
               ),
