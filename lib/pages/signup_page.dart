@@ -157,18 +157,18 @@ class SignUpPage extends StatelessWidget {
                       style: TextStyle(color: Color.fromARGB(255, 34, 45, 255)),
                     ),
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      context.go('/signin');
-                    },
-                    // child: const Text(
-                    //   '',
-                    //   style: TextStyle(
-                    //     color: Color.fromARGB(255, 0, 102, 255),
-                    //     fontWeight: FontWeight.bold,
-                    //   ),
-                    // ),
-                  ),
+                  // GestureDetector(
+                  //   onTap: () {
+                  //     context.go('/signin');
+                  //   },
+                  //   child: const Text(
+                  //     'Sign up',
+                  //     style: TextStyle(
+                  //       color: Color.fromARGB(255, 0, 102, 255),
+                  //       fontWeight: FontWeight.bold,
+                  //     ),
+                  //   ),
+                  // ),
                 ],
               ),
             ],
