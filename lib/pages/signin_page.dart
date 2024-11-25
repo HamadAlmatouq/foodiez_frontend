@@ -25,7 +25,7 @@ class SignInPage extends StatelessWidget {
           gradient: LinearGradient(
             colors: [
               Color.fromARGB(255, 112, 173, 99),
-              Color.fromARGB(255, 121, 87, 179),
+              Color.fromARGB(255, 255, 255, 255),
             ],
             stops: [0.0, 1.0],
             begin: Alignment.topCenter,
@@ -94,10 +94,7 @@ class SignInPage extends StatelessWidget {
                     ),
                   ),
                   onPressed: () {
-                    final username = usernameController.text.trim();
-                    final password = passwordController.text.trim();
-
-                    print('Username: $username, Password: $password');
+                    // Sign in button logic
                   },
                   child: const Text(
                     'Sign In',
@@ -119,7 +116,7 @@ class SignInPage extends StatelessWidget {
                     },
                     child: const Text(
                       "Don't have an account? ",
-                      style: TextStyle(color: Color.fromARGB(255, 34, 45, 255)),
+                      style: TextStyle(color: Color.fromARGB(255, 0, 0, 230)),
                     ),
                   ),
                   // GestureDetector(

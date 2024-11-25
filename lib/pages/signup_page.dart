@@ -28,7 +28,7 @@ class SignUpPage extends StatelessWidget {
           gradient: LinearGradient(
             colors: [
               Color.fromARGB(255, 112, 173, 99),
-              Color.fromARGB(255, 121, 87, 179),
+              Color.fromARGB(255, 255, 255, 255),
             ],
             stops: [0.0, 1.0],
             begin: Alignment.topCenter,
@@ -125,14 +125,7 @@ class SignUpPage extends StatelessWidget {
                     ),
                   ),
                   onPressed: () {
-                    final username = usernameController.text.trim();
-                    final email = emailController.text.trim();
-                    final password = passwordController.text.trim();
-                    final confirmPassword =
-                        confirmPasswordController.text.trim();
-
-                    print(
-                        'Username: $username, Email: $email, Password: $password, Confirm Password: $confirmPassword');
+                    //Sign up button logic
                   },
                   child: const Text(
                     'Sign Up',
@@ -154,7 +147,7 @@ class SignUpPage extends StatelessWidget {
                     },
                     child: const Text(
                       "Already have an account? ",
-                      style: TextStyle(color: Color.fromARGB(255, 34, 45, 255)),
+                      style: TextStyle(color: Color.fromARGB(255, 0, 0, 230)),
                     ),
                   ),
                   // GestureDetector(
