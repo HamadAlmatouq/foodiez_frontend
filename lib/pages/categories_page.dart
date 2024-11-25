@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:foodiez_frontend/pages/widgets/category_card.dart';
-import 'package:foodiez_frontend/pages/widgets/category_card.dart';
 
 class CategoriesPage extends StatelessWidget {
   final List<Map<String, dynamic>> categories = [
@@ -16,7 +15,7 @@ class CategoriesPage extends StatelessWidget {
     {'name': 'Keto', 'count': 10},
   ];
 
-   CategoriesPage({super.key});
+  CategoriesPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +24,18 @@ class CategoriesPage extends StatelessWidget {
         title: const Text('Categories'),
         backgroundColor: const Color.fromARGB(255, 112, 173, 99),
       ),
-      body: Padding(
+      body: Container(
+        // Correctly applying the gradient background to a Container widget
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Color.fromARGB(255, 112, 173, 99),
+              Color.fromARGB(255, 255, 255, 255),
+            ],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
         padding: const EdgeInsets.all(16.0),
         child: GridView.builder(
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

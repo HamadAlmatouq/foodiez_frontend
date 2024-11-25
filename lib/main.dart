@@ -81,7 +81,7 @@ class _MainScreenState extends State<MainScreen> {
         currentIndex: selectedIndex,
         selectedItemColor: const Color(0xFFB39DDB),
         unselectedItemColor: Colors.grey,
-        onTap: onItemTapped, // Call the function to switch tabs
+        onTap: onItemTapped,
       ),
     );
   }
