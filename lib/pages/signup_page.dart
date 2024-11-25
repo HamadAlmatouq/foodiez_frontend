@@ -135,6 +135,7 @@ class SignUpPage extends StatelessWidget {
                   obscureText: true,
                   validator: (value) {
                     if (value!.isEmpty) return "fill the blank";
+                    if (value != passwordController.text) return "Password is not the same";
                     return null;
                   },
                   onSaved: (newValue) {
@@ -156,7 +157,8 @@ class SignUpPage extends StatelessWidget {
                     if (!_formKey.currentState!.validate()) return;
                     _formKey.currentState!.save();
                     var response = await context.read<AuthProvider>().signup(username: username, password: password);
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(response)));
+                    if (response == "Username is used")
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(response)));
                     // if (provider.token[0].isEmpty) {
                     //   GoRouter.of(context).pop();
                     // } else {

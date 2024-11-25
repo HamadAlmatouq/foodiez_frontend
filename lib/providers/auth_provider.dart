@@ -13,8 +13,8 @@ class AuthProvider extends ChangeNotifier {
     token = await AuthServices().signup(user: User(username: username, password: password));
     //_setToken();
     //print(token);
-    return token;
     notifyListeners();
+    return token;
   }
 
   Future<void> signin({required String username, required String password}) async {
