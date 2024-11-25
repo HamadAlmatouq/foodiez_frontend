@@ -79,7 +79,7 @@ class _MainScreenState extends State<MainScreen> {
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
         ],
         currentIndex: selectedIndex,
-        selectedItemColor: Colors.blue,
+        selectedItemColor: const Color(0xFFB39DDB),
         unselectedItemColor: Colors.grey,
         onTap: onItemTapped, // Call the function to switch tabs
       ),
