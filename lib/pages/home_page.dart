@@ -1,9 +1,81 @@
+// import 'package:flutter/material.dart';
+// import 'package:foodiez_frontend/pages/widgets/search_bar.dart' as custom;
+// import 'package:foodiez_frontend/pages/widgets/recipe_list.dart';
+
+// class HomePage extends StatelessWidget {
+//   const HomePage({Key? key}) : super(key: key);
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       extendBodyBehindAppBar: true,
+//       appBar: AppBar(
+//         backgroundColor: Colors.transparent,
+//         elevation: 0,
+//       ),
+//       body: Container(
+//         decoration: const BoxDecoration(
+//           gradient: LinearGradient(
+//             colors: [
+//               Color.fromARGB(255, 112, 173, 99),
+//               Color.fromARGB(255, 255, 255, 255),
+//             ],
+//             stops: [0.0, 1.0],
+//             begin: Alignment.topCenter,
+//             end: Alignment.bottomCenter,
+//           ),
+//         ),
+//         child: Padding(
+//           padding: const EdgeInsets.all(16.0),
+//           child: Column(
+//             crossAxisAlignment: CrossAxisAlignment.start,
+//             children: [
+//               const SizedBox(height: 50), // Spacing for AppBar
+//               const Text(
+//                 'Good morning --',
+//                 style: TextStyle(
+//                   fontSize: 32,
+//                   fontWeight: FontWeight.bold,
+//                   color: Colors.white,
+//                 ),
+//               ),
+//               const SizedBox(height: 8),
+//               const Text(
+//                 'Explore new healthy recipes',
+//                 style: TextStyle(
+//                   fontSize: 16,
+//                   color: Colors.white70,
+//                 ),
+//               ),
+//               const SizedBox(height: 20),
+//               const custom.SearchBar(),
+//               const SizedBox(height: 20),
+//               const Text(
+//                 'High Rated Recipes',
+//                 style: TextStyle(
+//                   fontSize: 20,
+//                   fontWeight: FontWeight.bold,
+//                   color: Colors.black87,
+//                 ),
+//               ),
+//               const SizedBox(height: 10),
+//               const Expanded(child: RecipeList()),
+//             ],
+//           ),
+//         ),
+//       ),
+//       // bottomNavigationBar: const BottomNav(),
+//     );
+//   }
+// }
 import 'package:flutter/material.dart';
 import 'package:foodiez_frontend/pages/widgets/search_bar.dart' as custom;
 import 'package:foodiez_frontend/pages/widgets/recipe_list.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+  final String? username; // Pass the username to this widget
+
+  const HomePage({Key? key, this.username}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,10 +102,10 @@ class HomePage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 50), // Spacing for AppBar
-              const Text(
-                'Good morning --',
-                style: TextStyle(
+              const SizedBox(height: 20), // Reduced spacing at the top
+              Text(
+                'Good morning, ${username ?? 'Hot Stuff'}',
+                style: const TextStyle(
                   fontSize: 32,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
@@ -48,15 +120,36 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
+              // Updated SearchBar to have white outline
               const custom.SearchBar(),
               const SizedBox(height: 20),
-              const Text(
-                'High Rated Recipes',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black87,
-                ),
+              // Centered High Rated Recipes with horizontal lines
+              Row(
+                children: const [
+                  Expanded(
+                    child: Divider(
+                      color: Color.fromARGB(255, 255, 255, 255),
+                      thickness: 1,
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Text(
+                      'High Rated Recipes',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Color.fromARGB(221, 255, 255, 255),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Divider(
+                      color: Color.fromARGB(255, 255, 255, 255),
+                      thickness: 1,
+                    ),
+                  ),
+                ],
               ),
               const SizedBox(height: 10),
               const Expanded(child: RecipeList()),
@@ -64,7 +157,6 @@ class HomePage extends StatelessWidget {
           ),
         ),
       ),
-      // bottomNavigationBar: const BottomNav(),
     );
   }
 }
