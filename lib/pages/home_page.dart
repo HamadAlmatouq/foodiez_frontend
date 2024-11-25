@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-// import 'package:foodiez_frontend/pages/widgets/search_bar.dart';
 import 'package:foodiez_frontend/pages/widgets/search_bar.dart' as custom;
 import 'package:foodiez_frontend/pages/widgets/recipe_list.dart';
-import 'package:foodiez_frontend/pages/widgets/bottom_nav.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -66,7 +64,7 @@ class HomePage extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: const BottomNav(),
+      // bottomNavigationBar: const BottomNav(),
     );
   }
 }
