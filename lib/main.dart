@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodiez_frontend/pages/home_page.dart';
 import 'package:foodiez_frontend/pages/signin_page.dart';
 import 'package:foodiez_frontend/pages/signup_page.dart';
 import 'package:go_router/go_router.dart';
@@ -12,7 +13,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final GoRouter _router = GoRouter(
-      initialLocation: '/signup', //Main page
+      initialLocation: '/home', //Main page
       routes: [
         GoRoute(
           path: '/signin',
@@ -21,6 +22,10 @@ class MainApp extends StatelessWidget {
         GoRoute(
           path: '/signup',
           builder: (context, state) => SignUpPage(),
+        ),
+        GoRoute(
+          path: '/home',
+          builder: (context, state) => const HomePage(),
         ),
       ],
     );
