@@ -56,7 +56,7 @@ class _MainScreenState extends State<MainScreen> {
     const HomePage(), // Home page content
     CategoriesPage(), // Categories page content
     const FavoritesPage(), // Favorites page content
-    const ProfilePage(), // Profile page content
+    ProfilePage(), // Profile page content
   ];
 
   void onItemTapped(int index) {
