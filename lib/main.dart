@@ -54,7 +54,7 @@ class _MainScreenState extends State<MainScreen> {
   // List of pages for each tab
   final List<Widget> pages = [
     const HomePage(), // Home page content
-    const CategoriesPage(), // Categories page content
+    CategoriesPage(), // Categories page content
     const FavoritesPage(), // Favorites page content
     const ProfilePage(), // Profile page content
   ];
