@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
+import 'package:foodiez_frontend/providers/auth_provider.dart';
 
 class SignInPage extends StatelessWidget {
   final TextEditingController usernameController = TextEditingController();
@@ -68,6 +70,7 @@ class SignInPage extends StatelessWidget {
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12.0),
                     ),
+                    //////////
                     prefixIcon:
                         const Icon(Icons.person, color: Color(0xFFB39DDB)),
                   ),
@@ -90,7 +93,8 @@ class SignInPage extends StatelessWidget {
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12.0),
                     ),
-                    prefixIcon: const Icon(Icons.lock, color: Color(0xFFB39DDB)),
+                    prefixIcon:
+                        const Icon(Icons.lock, color: Color(0xFFB39DDB)),
                   ),
                   obscureText: true,
                   validator: (value) {
@@ -112,10 +116,20 @@ class SignInPage extends StatelessWidget {
                         borderRadius: BorderRadius.circular(12.0),
                       ),
                     ),
-                    onPressed: () {
+                    onPressed: () async {
                       // Sign in button logic
                       if (!_formKey.currentState!.validate()) return;
-                    _formKey.currentState!.save();
+                      _formKey.currentState!.save();
+                      try {
+                        await Provider.of<AuthProvider>(context, listen: false)
+                            .signin(
+                          username: username,
+                          password: password,
+                        );
+                        context.go('/home');
+                      } catch (e) {
+                        print('Sign in failed: $e');
+                      }
                     },
                     child: const Text(
                       'Sign In',
