@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:foodiez_frontend/pages/home_page.dart';
+import 'package:foodiez_frontend/pages/recipes_page.dart';
 import 'package:foodiez_frontend/pages/signin_page.dart';
 import 'package:foodiez_frontend/pages/signup_page.dart';
 import 'package:foodiez_frontend/pages/categories_page.dart';
 import 'package:foodiez_frontend/pages/favorites_page.dart';
 import 'package:foodiez_frontend/pages/profile_page.dart';
 import 'package:go_router/go_router.dart';
-
 void main() {
   runApp(const MainApp());
 }
@@ -16,7 +16,7 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final GoRouter _router = GoRouter(
+    final GoRouter router = GoRouter(
       initialLocation: '/mainscreen', // Main page
       routes: [
         GoRoute(
@@ -31,12 +31,16 @@ class MainApp extends StatelessWidget {
           path: '/mainscreen',
           builder: (context, state) => const MainScreen(),
         ),
+        GoRoute(
+          path: '/recipes',
+          builder: (context, state) => RecipesPage(),
+        ),
       ],
     );
 
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      routerConfig: _router,
+      routerConfig: router,
     );
   }
 }
