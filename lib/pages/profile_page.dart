@@ -1,18 +1,32 @@
 import 'package:flutter/material.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
+  const ProfilePage({super.key});
+
+  @override
+  _ProfilePageState createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
   final List<Map<String, String>> recipes = [
     {"id": "1", "title": "Avocado Toast"},
     {"id": "2", "title": "Grilled Chicken Salad"},
     {"id": "3", "title": "Berry Smoothie"}
   ];
 
+  // Method to add a new recipe
+  void _addRecipe(String title) {
+    setState(() {
+      recipes.add({"id": (recipes.length + 1).toString(), "title": title});
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(''),
-        backgroundColor: Color.fromARGB(255, 112, 173, 99),
+        title: const Text('Profile'),
+        backgroundColor: const Color.fromARGB(255, 112, 173, 99),
         centerTitle: true,
       ),
       body: Container(
@@ -46,7 +60,7 @@ class ProfilePage extends StatelessWidget {
                     ),
                     const SizedBox(height: 16),
                     const Text(
-                      'Hello,',
+                      'Hello, Chef',
                       style:
                           TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                     ),
@@ -127,6 +141,50 @@ class ProfilePage extends StatelessWidget {
           ),
         ),
       ),
+      // Add Recipe Button (Floating Action Button)
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          _showAddRecipeDialog(context);
+        },
+        child: const Icon(Icons.add),
+        backgroundColor: const Color.fromARGB(255, 112, 173, 99),
+      ),
+    );
+  }
+
+  // Function to show dialog for adding new recipe
+  void _showAddRecipeDialog(BuildContext context) {
+    final TextEditingController titleController = TextEditingController();
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Add New Recipe'),
+          content: TextField(
+            controller: titleController,
+            decoration: const InputDecoration(hintText: 'Enter recipe title'),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () {
+                final title = titleController.text;
+                if (title.isNotEmpty) {
+                  _addRecipe(title);
+                  Navigator.of(context).pop();
+                }
+              },
+              child: const Text('Add'),
+            ),
+          ],
+        );
+      },
     );
   }
 }
