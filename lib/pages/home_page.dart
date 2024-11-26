@@ -43,7 +43,7 @@ class HomePage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Good morning, ${username ?? 'Hot Stuff'}',
+                    'Good morning, \n ${username ?? 'Wahab 💪 '}',
                     style: const TextStyle(
                       fontSize: 32,
                       fontWeight: FontWeight.bold,
@@ -103,7 +103,8 @@ class HomePage extends StatelessWidget {
                     crossAxisCount: 2, // Two cards per row
                     crossAxisSpacing: 10,
                     mainAxisSpacing: 10,
-                    childAspectRatio: 3 / 4, // Adjust aspect ratio to match card dimensions
+                    childAspectRatio:
+                        3 / 4, // Adjust aspect ratio to match card dimensions
                   ),
                   itemCount: highRatedRecipes.length,
                   itemBuilder: (context, index) {

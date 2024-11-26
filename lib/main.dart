@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodiez_frontend/pages/AddRecipePage.dart';
 import 'package:foodiez_frontend/pages/home_page.dart';
 import 'package:foodiez_frontend/pages/recipes_page.dart';
 import 'package:foodiez_frontend/pages/signin_page.dart';
@@ -45,6 +46,10 @@ class MainApp extends StatelessWidget {
         GoRoute(
           path: '/recipes',
           builder: (context, state) => RecipesPage(),
+        ),
+        GoRoute(
+          path: '/add-recipe',
+          builder: (context, state) => AddRecipePage(),
         ),
       ],
     );

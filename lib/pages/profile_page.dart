@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -15,9 +16,12 @@ class _ProfilePageState extends State<ProfilePage> {
   ];
 
   // Method to add a new recipe
-  void _addRecipe(String title) {
+  void _addRecipe(Map<String, String> recipe) {
     setState(() {
-      recipes.add({"id": (recipes.length + 1).toString(), "title": title});
+      recipes.add({
+        "id": (recipes.length + 1).toString(),
+        "title": recipe["title"] ?? "Untitled Recipe",
+      });
     });
   }
 
@@ -143,48 +147,17 @@ class _ProfilePageState extends State<ProfilePage> {
       ),
       // Add Recipe Button (Floating Action Button)
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          _showAddRecipeDialog(context);
+        onPressed: () async {
+          // Navigate to AddRecipePage and await the result
+          final newRecipe =
+              await context.push<Map<String, String>>('/add-recipe');
+          if (newRecipe != null) {
+            _addRecipe(newRecipe);
+          }
         },
         child: const Icon(Icons.add),
         backgroundColor: const Color.fromARGB(255, 112, 173, 99),
       ),
-    );
-  }
-
-  // Function to show dialog for adding new recipe
-  void _showAddRecipeDialog(BuildContext context) {
-    final TextEditingController titleController = TextEditingController();
-
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Add New Recipe'),
-          content: TextField(
-            controller: titleController,
-            decoration: const InputDecoration(hintText: 'Enter recipe title'),
-          ),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text('Cancel'),
-            ),
-            TextButton(
-              onPressed: () {
-                final title = titleController.text;
-                if (title.isNotEmpty) {
-                  _addRecipe(title);
-                  Navigator.of(context).pop();
-                }
-              },
-              child: const Text('Add'),
-            ),
-          ],
-        );
-      },
     );
   }
 }
