@@ -36,14 +36,14 @@ class HomePage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 60), // Reduced spacing at the top
+            const SizedBox(height: 90), // Reduced spacing at the top
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Good morning, ${username ?? 'Hot Stuff'}',
+                    'Good morning ...\n ${username ?? 'Abdulwahab 💪🏻'}',
                     style: const TextStyle(
                       fontSize: 32,
                       fontWeight: FontWeight.bold,
@@ -90,7 +90,7 @@ class HomePage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 0),
                 ],
               ),
             ),

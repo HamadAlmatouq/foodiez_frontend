@@ -1,7 +1,7 @@
 final List<Map<String, dynamic>> recipes = [
   {
     'id': 1,
-    'image': 'https://via.placeholder.com/150',
+    'image': 'assets/Images/cake.jpg', // Path to the image in assets
     'title': 'Spaghetti Carbonara',
     'category': 'MainDish',
     'chef': 'Chef Mari',
@@ -12,7 +12,7 @@ final List<Map<String, dynamic>> recipes = [
   },
   {
     'id': 2,
-    'image': 'https://via.placeholder.com/150',
+    'image': 'assets/Images/cake.jpg', // Path to the image in assets
     'title': 'Caesar Salad',
     'category': 'Salad',
     'chef': 'Chef Anna',
@@ -23,7 +23,7 @@ final List<Map<String, dynamic>> recipes = [
   },
   {
     'id': 3,
-    'image': 'https://via.placeholder.com/150',
+    'image': 'assets/Images/cake.jpg', // Path to the image in assets
     'title': 'Chocolate Cake',
     'category': 'Dessert',
     'chef': 'Chef Clara',
@@ -34,7 +34,7 @@ final List<Map<String, dynamic>> recipes = [
   },
   {
     'id': 4,
-    'image': 'https://via.placeholder.com/150',
+    'image': 'assets/Images/cake.jpg', // Path to the image in assets
     'title': 'Green Smoothie',
     'category': 'Smoothies',
     'chef': 'Chef John',
@@ -45,7 +45,7 @@ final List<Map<String, dynamic>> recipes = [
   },
   {
     'id': 5,
-    'image': 'https://via.placeholder.com/150',
+    'image': 'assets/Images/cake.jpg', // Path to the image in assets
     'title': 'Grilled Chicken',
     'category': 'Main Dish',
     'chef': 'Chef Alex',

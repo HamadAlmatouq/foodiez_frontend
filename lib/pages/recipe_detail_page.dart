@@ -21,7 +21,7 @@ class RecipeDetailPage extends StatelessWidget {
               // Recipe Image
               ClipRRect(
                 borderRadius: BorderRadius.circular(12),
-                child: Image.network(
+                child: Image.asset(
                   recipe['image'],
                   height: 200,
                   width: double.infinity,
