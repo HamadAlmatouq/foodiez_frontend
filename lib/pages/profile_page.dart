@@ -25,6 +25,23 @@ class _ProfilePageState extends State<ProfilePage> {
     });
   }
 
+  // Method to handle editing a recipe
+  void _editRecipe(Map<String, String> recipe) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Edit ${recipe['title']}')),
+    );
+  }
+
+  // Method to handle deleting a recipe
+  void _deleteRecipe(Map<String, String> recipe) {
+    setState(() {
+      recipes.removeWhere((r) => r['id'] == recipe['id']);
+    });
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Deleted ${recipe['title']}')),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -108,29 +125,13 @@ class _ProfilePageState extends State<ProfilePage> {
                                 IconButton(
                                   icon: const Icon(Icons.edit),
                                   color: Colors.green,
-                                  onPressed: () {
-                                    // TODO: Implement Edit functionality
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                        content:
-                                            Text('Edit ${recipe['title']}'),
-                                      ),
-                                    );
-                                  },
+                                  onPressed: () => _editRecipe(recipe),
                                 ),
                                 const SizedBox(width: 8),
                                 IconButton(
                                   icon: const Icon(Icons.delete),
                                   color: Colors.red,
-                                  onPressed: () {
-                                    // TODO: Implement Delete functionality
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                        content:
-                                            Text('Deleted ${recipe['title']}'),
-                                      ),
-                                    );
-                                  },
+                                  onPressed: () => _deleteRecipe(recipe),
                                 ),
                               ],
                             ),
