@@ -5,9 +5,10 @@ import 'package:foodiez_frontend/services/recipes.dart';
 class RecipesProvider extends ChangeNotifier {
   List<Recipe> recipes = [];
 
-  Future<void> getRecipes() async {
+  Future<List<Recipe>> getRecipes() async {
     // print("getting recipes");
     recipes = await DioClient().getRecipes();
+    return recipes;
   }
 
   void createRecipe(Recipe recipe) async {

@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:foodiez_frontend/models/recipe.dart';
 
 class RecipeDetailPage extends StatelessWidget {
-  final Map<String, dynamic> recipe;
+  final Recipe recipe;
 
   const RecipeDetailPage({super.key, required this.recipe});
 
   @override
   Widget build(BuildContext context) {
+    var ingredientsList = '';
+    for (var ingredient in recipe.ingredients) {
+      ingredientsList += '- $ingredient \n';
+    }
+    // print(ingredientsList);
     return Scaffold(
       appBar: AppBar(
-        title: Text(recipe['title']),
+        title: Text(recipe.name),
         backgroundColor: const Color.fromARGB(255, 112, 173, 99),
       ),
       body: Padding(
@@ -21,8 +27,8 @@ class RecipeDetailPage extends StatelessWidget {
               // Recipe Image
               ClipRRect(
                 borderRadius: BorderRadius.circular(12),
-                child: Image.network(
-                  recipe['image'],
+                child: Image.asset(
+                  'assets/Images/placeholder.png',
                   height: 200,
                   width: double.infinity,
                   fit: BoxFit.cover,
@@ -31,14 +37,14 @@ class RecipeDetailPage extends StatelessWidget {
               const SizedBox(height: 20),
               // Title and Chef
               Text(
-                recipe['title'],
+                recipe.name,
                 style: const TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               Text(
-                'By ${recipe['chef']}',
+                'By ${recipe.username}',
                 style: const TextStyle(fontSize: 16, color: Colors.grey),
               ),
               const SizedBox(height: 20),
@@ -65,7 +71,7 @@ class RecipeDetailPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 8),
-              const Text('- Ingredient 1\n- Ingredient 2\n- Ingredient 3'),
+              Text(ingredientsList),
               const SizedBox(height: 20),
               // Steps
               const Text(

@@ -35,8 +35,8 @@ class RecipeCard extends StatelessWidget {
             // Recipe Image
             ClipRRect(
               borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
-              child: Image.network(
-                image,
+              child: Image.asset(
+                'assets/Images/placeholder.png',
                 height: 120,
                 width: double.infinity,
                 fit: BoxFit.cover,
