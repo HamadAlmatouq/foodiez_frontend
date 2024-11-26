@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:foodiez_frontend/providers/auth_provider.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 class SignInPage extends StatelessWidget {
   final TextEditingController usernameController = TextEditingController();
@@ -98,7 +100,7 @@ class SignInPage extends StatelessWidget {
                     return null;
                   },
                   onSaved: (newValue) {
-                    username = newValue!;
+                    password = newValue!;
                   },
                 ),
                 const SizedBox(height: 30),
@@ -112,10 +114,17 @@ class SignInPage extends StatelessWidget {
                         borderRadius: BorderRadius.circular(12.0),
                       ),
                     ),
-                    onPressed: () {
+                    onPressed: () async {
                       // Sign in button logic
                       if (!_formKey.currentState!.validate()) return;
-                    _formKey.currentState!.save();
+                      _formKey.currentState!.save();
+                      var response = await context.read<AuthProvider>().signin(username: username, password: password);
+                      print(response);
+                      if (response == "Invalid credentials") {
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(response)));
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Sign in successfully")));
+                    }
                     },
                     child: const Text(
                       'Sign In',
