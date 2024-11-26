@@ -6,9 +6,20 @@ import 'package:foodiez_frontend/pages/signup_page.dart';
 import 'package:foodiez_frontend/pages/categories_page.dart';
 import 'package:foodiez_frontend/pages/favorites_page.dart';
 import 'package:foodiez_frontend/pages/profile_page.dart';
+import 'package:foodiez_frontend/providers/auth_provider.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
+
 void main() {
-  runApp(const MainApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider<AuthProvider>(create: (_) => AuthProvider()),
+        // ChangeNotifierProvider<StocksProvider>(create: (_) => StocksProvider()),
+      ],
+      child: MainApp(),
+    ),
+  );
 }
 
 class MainApp extends StatelessWidget {
