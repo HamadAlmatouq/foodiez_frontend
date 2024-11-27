@@ -139,7 +139,7 @@ class HomePage extends StatelessWidget {
                       children: [
                         Expanded(
                           child: Divider(
-                            color: Colors.white,
+                            color: Color(0xFFB39DDB),
                             thickness: 1,
                           ),
                         ),
@@ -150,13 +150,13 @@ class HomePage extends StatelessWidget {
                             style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
-                              color: Colors.white,
+                              color: Color(0xFFB39DDB),
                             ),
                           ),
                         ),
                         Expanded(
                           child: Divider(
-                            color: Colors.white,
+                            color: Color(0xFFB39DDB),
                             thickness: 1,
                           ),
                         ),
