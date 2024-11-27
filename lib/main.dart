@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:foodiez_frontend/pages/addRecipePage.dart';
 import 'package:foodiez_frontend/pages/home_page.dart';
+import 'package:foodiez_frontend/pages/recipe_detail_page.dart';
 import 'package:foodiez_frontend/pages/recipes_page.dart';
 import 'package:foodiez_frontend/pages/signin_page.dart';
 import 'package:foodiez_frontend/pages/signup_page.dart';
@@ -8,6 +10,7 @@ import 'package:foodiez_frontend/pages/categories_page.dart';
 import 'package:foodiez_frontend/pages/favorites_page.dart';
 import 'package:foodiez_frontend/pages/profile_page.dart';
 import 'package:foodiez_frontend/providers/auth_provider.dart';
+import 'package:foodiez_frontend/recipes_data.dart';
 import 'package:foodiez_frontend/providers/recipe_provider.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -49,8 +52,16 @@ class MainApp extends StatelessWidget {
           builder: (context, state) => RecipesPage(),
         ),
         GoRoute(
-          path: '/test',
-          builder: (context, state) => const TestPage(),
+          path: '/add-recipe',
+          builder: (context, state) => AddRecipePage(),
+        ),
+        GoRoute(
+          path: '/recipe/:id',
+          builder: (context, state) {
+            final id = int.parse(state.pathParameters['id']!);
+            final recipe = recipes.firstWhere((recipe) => recipe['id'] == id);
+            return RecipeDetailPage(recipe: recipe);
+          },
         ),
       ],
     );
