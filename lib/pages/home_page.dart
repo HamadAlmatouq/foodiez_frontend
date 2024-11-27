@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:foodiez_frontend/main.dart';
-import 'package:foodiez_frontend/models/recipe.dart';
+// import 'package:foodiez_frontend/main.dart';
+// import 'package:foodiez_frontend/models/recipe.dart';
 import 'package:foodiez_frontend/pages/widgets/search_bar.dart' as custom;
 import 'package:foodiez_frontend/pages/widgets/recipe_card.dart';
 import 'package:foodiez_frontend/providers/auth_provider.dart';
 import 'package:foodiez_frontend/providers/recipe_provider.dart';
-import 'package:foodiez_frontend/recipes_data.dart';
+// import 'package:foodiez_frontend/recipes_data.dart';
 import 'package:foodiez_frontend/pages/recipe_detail_page.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -17,8 +17,8 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final highRatedRecipes =
-        recipes.where((recipe) => recipe['rating'] >= 4.5).toList();
+    // final highRatedRecipes =
+    //     recipes.where((recipe) => recipe['rating'] >= 4.5).toList();
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -146,41 +146,57 @@ class HomePage extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: FutureBuilder(
-                  future: context.read<RecipesProvider>().getRecipes(),
+                  future: Provider.of<RecipesProvider>(context, listen: false).getRecipes(),
                   builder: (context, dataSnapshot) {
-                    return Consumer<RecipesProvider>(
-                      builder: (context, provider, child) {
-                        return GridView.builder(
-                          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2, 
-                            crossAxisSpacing: 10,
-                            mainAxisSpacing: 10,
-                            childAspectRatio: 3 / 4, 
-                          ),
-                          itemCount: provider.recipes.length,
-                          itemBuilder: (context, index) {
-                            final recipe = provider.recipes[index];
-                            return RecipeCard(
-                              image: '',
-                              title: recipe.name,
-                              category: recipe.category,
-                              chef: recipe.username,
-                              calories: 0,
-                              likes: 0,
-                              onTap: () {
-                                Navigator.push( //how about router?
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        RecipeDetailPage(recipe: recipe),
-                                  ),
+                    if (dataSnapshot.connectionState == ConnectionState.waiting) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                    else {
+                      if (dataSnapshot.error != null) {
+                        print('error');
+                        return const Center(
+                          child: Text('An error occurred'),
+                        );
+                      }
+                      else {
+                        return Consumer<RecipesProvider>(
+                          builder: (context, provider, child) {
+                            return GridView.builder(
+                              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2, 
+                                crossAxisSpacing: 10,
+                                mainAxisSpacing: 10,
+                                childAspectRatio: 3 / 4, 
+                              ),
+                              itemCount: provider.recipes.length,
+                              itemBuilder: (context, index) {
+                                final recipe = provider.recipes[index];
+                                return RecipeCard(
+                                  image: recipe.image,
+                                  title: recipe.name,
+                                  category: recipe.category,
+                                  chef: recipe.username,
+                                  calories: 0,
+                                  likes: 0,
+                                  onTap: () {
+                                    Navigator.push( //how about router?
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            RecipeDetailPage(recipe: recipe),
+                                      ),
+                                    );
+                                  },
                                 );
                               },
                             );
-                          },
+                          }
                         );
                       }
-                    );
+                    }
+                    
                   }
                 ),
               ),
