@@ -3,10 +3,12 @@ import 'package:foodiez_frontend/pages/home_page.dart';
 import 'package:foodiez_frontend/pages/recipes_page.dart';
 import 'package:foodiez_frontend/pages/signin_page.dart';
 import 'package:foodiez_frontend/pages/signup_page.dart';
+import 'package:foodiez_frontend/pages/test_page.dart';
 import 'package:foodiez_frontend/pages/categories_page.dart';
 import 'package:foodiez_frontend/pages/favorites_page.dart';
 import 'package:foodiez_frontend/pages/profile_page.dart';
 import 'package:foodiez_frontend/providers/auth_provider.dart';
+import 'package:foodiez_frontend/providers/recipe_provider.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
@@ -15,9 +17,9 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider<AuthProvider>(create: (_) => AuthProvider()),
-        // ChangeNotifierProvider<StocksProvider>(create: (_) => StocksProvider()),
+        ChangeNotifierProvider<RecipesProvider>(create: (_) => RecipesProvider()),
       ],
-      child: MainApp(),
+      child: const MainApp(),
     ),
   );
 }
@@ -45,6 +47,10 @@ class MainApp extends StatelessWidget {
         GoRoute(
           path: '/recipes',
           builder: (context, state) => RecipesPage(),
+        ),
+        GoRoute(
+          path: '/test',
+          builder: (context, state) => const TestPage(),
         ),
       ],
     );

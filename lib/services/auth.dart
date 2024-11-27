@@ -4,31 +4,27 @@ import 'package:foodiez_frontend/services/client.dart';
 
 class AuthServices {
 
-  Future<String> signup({required User user}) async {
-    late String token;
+  Future<Map<String, String>> signup({required User user}) async {
     try {
-      // print('Signing up');
-      // print(user.toJson());
-      Response response =
-          await Client.dio.post('/signup', data: user.toJson());
-      token = response.data["token"];
-      // print(response.data);
-      return token;
+      Response response = await Client.dio.post('/signup', data: user.toJson());
+      return {'token': response.data["token"]};
     } on DioException catch (error) {
       print(error.response!.data["error"]["message"]);
-      return error.response!.data["error"]["message"];
+      return {'error': error.response!.data["error"]["message"]};
     }
   }
 
   Future<String> signin({required User user}) async {
     late String token;
     try {
+      // print(user.toJson());
       Response response =
           await Client.dio.post('/signin', data: user.toJson());
       token = response.data["token"];
-      print(token);
+      // print(token);
     } on DioException catch (error) {
-      print(error);
+      print(error.response!);
+      return error.response!.data["error"]["message"];
     }
     return token;
   }
