@@ -12,7 +12,7 @@ class RecipeList extends StatelessWidget {
         mainAxisSpacing: 10,
         childAspectRatio: 3 / 4,
       ),
-      itemCount: 6, // Example: 6 recipes
+      itemCount: 6, 
       itemBuilder: (context, index) {
         return Container(
           decoration: BoxDecoration(
