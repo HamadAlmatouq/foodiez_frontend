@@ -13,6 +13,7 @@ class DioClient {
         return Recipe.fromJson(recipe);
       }).toList();
     } on DioException catch (error) {
+      print('cannot get recipes');
       print(error);
     }
     return recipes;
@@ -28,12 +29,16 @@ class DioClient {
         "description": recipe.description,
         "category": recipe.category,
         "image": recipe.image,
+        "steps": recipe.steps
         //await MultipartFile.fromFile(
           //recipe.image,
         //),
       });
       Response response = await Client.dio.post('/recipes', data: data);
-      retrievedRecipe = Recipe.fromJson(response.data);
+      // print(response.data);
+      // print(response.data['recipe']);
+      retrievedRecipe = Recipe.fromJson2(response.data['recipe']);
+      // print(retrievedRecipe);
     } on DioException catch (error) {
       print(error);
     }
@@ -62,7 +67,7 @@ class DioClient {
     return retrievedRecipe;
   }
 
-  Future<void> deleteRecipe({required int recipeId}) async {
+  Future<void> deleteRecipe({required String recipeId}) async {
     try {
       await Client.dio.delete('/recipes/$recipeId');
     } on DioException catch (error) {

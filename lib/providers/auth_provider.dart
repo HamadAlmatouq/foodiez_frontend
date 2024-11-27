@@ -54,6 +54,7 @@ class AuthProvider extends ChangeNotifier {
     this.token = token; 
     user = User(username: username, password: token);
     prefs.setString("username", username);
+    // prefs.setString("password", username);
     prefs.setString("token", token);
     notifyListeners();
   }
@@ -75,6 +76,7 @@ class AuthProvider extends ChangeNotifier {
     prefs.remove('username');
     prefs.remove('token');
     user = null;
+    token = null;
     notifyListeners();
   }
 }

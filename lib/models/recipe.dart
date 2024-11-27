@@ -6,6 +6,7 @@ class Recipe {
   String? description;
   String category;
   String? image;
+  List<dynamic>? steps;
 
   Recipe(
       {
@@ -15,7 +16,8 @@ class Recipe {
         required this.ingredients,
         this.description,
         required this.category,
-        this.image
+        this.image,
+        this.steps
       }
     );
 
@@ -26,5 +28,16 @@ class Recipe {
         ingredients = json['ingredients'] as List<dynamic>,
         description = json['description'] as String?,
         category = json['category'] as String,
-        image = json['image'] as String?;
+        image = json['image'] as String?,
+        steps = json['steps'] as List<dynamic>;
+  
+  Recipe.fromJson2(Map<String, dynamic> json)
+      : id = json['_id'] as String?,
+        name = json['name'] as String,
+        username = json['username'] as String,
+        ingredients = json['ingredients'] as List<dynamic>,
+        description = json['description'] as String?,
+        category = json['category'] as String,
+        image = json['image'] as String?,
+        steps = json['steps'] as List<dynamic>;
 }

@@ -55,14 +55,14 @@ class MainApp extends StatelessWidget {
           path: '/add-recipe',
           builder: (context, state) => AddRecipePage(),
         ),
-        GoRoute(
-          path: '/recipe/:id',
-          builder: (context, state) {
-            final id = int.parse(state.pathParameters['id']!);
-            final recipe = recipes.firstWhere((recipe) => recipe['id'] == id);
-            return RecipeDetailPage(recipe: recipe);
-          },
-        ),
+        // GoRoute(
+        //   path: '/recipe/:id',
+        //   builder: (context, state) {
+        //     final id = int.parse(state.pathParameters['id']!);
+        //     final recipe = recipes.firstWhere((recipe) => recipe['id'] == id);
+        //     return RecipeDetailPage(recipe: recipe);
+        //   },
+        // ),
       ],
     );
 

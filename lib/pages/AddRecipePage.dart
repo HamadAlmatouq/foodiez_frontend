@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:foodiez_frontend/main.dart';
+import 'package:foodiez_frontend/models/recipe.dart';
+import 'package:foodiez_frontend/providers/auth_provider.dart';
+import 'package:foodiez_frontend/providers/recipe_provider.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 class AddRecipePage extends StatefulWidget {
   const AddRecipePage({super.key, this.recipe});
@@ -13,6 +18,7 @@ class _AddRecipePageState extends State<AddRecipePage> {
   final TextEditingController titleController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
   final List<Map<String, String>> ingredients = [];
+  final List<String> ingredients2 = [];
   final List<String> steps = [];
   final TextEditingController stepController = TextEditingController();
   String? selectedCategory;
@@ -248,6 +254,17 @@ class _AddRecipePageState extends State<AddRecipePage> {
                     'ingredients': ingredients,
                     'steps': steps,
                   };
+                  final recipeObject = Recipe(
+                    name: titleController.text, 
+                    username: context.read<AuthProvider>().user!.username, 
+                    ingredients: ingredients.map((element) => "${element["ingredient"]} ${element["amount"]}").toList(),
+                    description: descriptionController.text, 
+                    category: selectedCategory!,
+                    image: null,
+                    steps: steps
+                  );
+                  // var test = [{"ingredient": "Eggs (pieces)", "amount": 12}, {"ingredient": "Sugar (cups)", "amount": 24}, {"ingredient": "Butter (tablespoons)", "amount": 10}];
+                  context.read<RecipesProvider>().createRecipe(recipeObject);
                   //Pass data after pop
                   context.pop(recipe);
                 } else {
@@ -256,12 +273,12 @@ class _AddRecipePageState extends State<AddRecipePage> {
                   );
                 }
               },
-              child: const Text('Create Recipe'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color.fromARGB(255, 112, 173, 99),
                 padding: const EdgeInsets.symmetric(vertical: 16),
                 textStyle: const TextStyle(fontSize: 16),
               ),
+              child: const Text('Create Recipe'),
             ),
           ],
         ),
