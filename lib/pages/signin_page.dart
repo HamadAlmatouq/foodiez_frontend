@@ -120,11 +120,12 @@ class SignInPage extends StatelessWidget {
                       _formKey.currentState!.save();
                       var response = await context.read<AuthProvider>().signin(username: username, password: password);
                       print(response);
-                      if (response == "Invalid credentials") {
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(response)));
-                    } else {
-                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Sign in successfully")));
-                    }
+                      if (response['error'] != null) {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(response['error']!)));
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Sign in successfully")));
+                        GoRouter.of(context).pop();
+                      }
                     },
                     child: const Text(
                       'Sign In',

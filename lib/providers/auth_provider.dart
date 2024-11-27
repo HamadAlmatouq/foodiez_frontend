@@ -6,7 +6,7 @@ import 'package:foodiez_frontend/services/client.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthProvider extends ChangeNotifier {
-  String token = ""; //"error", "email", "token"
+  String? token; //"error", "email", "token"
   User? user;
 
   Future<Map<String, String>> signup({required String username, required String password}) async {
@@ -19,18 +19,20 @@ class AuthProvider extends ChangeNotifier {
     return response;
   }
 
-  Future<String> signin({required String username, required String password}) async {
-    token = await AuthServices().signin(user: User(username: username, password: password));
+  Future<Map<String, String>> signin({required String username, required String password}) async {
+    var response = await AuthServices().signin(user: User(username: username, password: password));
     // this.user = user;
-    _setToken(username, token);
+    if (response['token'] != null) {
+      _setToken(username, response['token']!);
+    }
     // print(token);
     user = User(username: username, password: password);
     notifyListeners();
-    return token;
+    return response;
   }
 
   bool isAuth() {
-    return (user != null && token.isEmpty);
+    return (user != null && token != null);
   }
 
   Future<void> initAuth() async {
