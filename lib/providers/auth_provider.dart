@@ -26,16 +26,18 @@ class AuthProvider extends ChangeNotifier {
       _setToken(username, response['token']!);
     }
     // print(token);
-    user = User(username: username, password: password);
     notifyListeners();
     return response;
   }
 
   bool isAuth() {
+    // print(user ?? 'No User');
+    // print(token ?? 'No token');
     return (user != null && token != null);
   }
 
   Future<void> initAuth() async {
+    print("initAuth");
     await _getToken();
     if (isAuth()) {
       Client.dio.options.headers = {
@@ -49,6 +51,8 @@ class AuthProvider extends ChangeNotifier {
 
   void _setToken(String username, String token) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    this.token = token; 
+    user = User(username: username, password: token);
     prefs.setString("username", username);
     prefs.setString("token", token);
     notifyListeners();
@@ -62,6 +66,7 @@ class AuthProvider extends ChangeNotifier {
     if (username == null || token == null) return;
 
     user = User(username: username, password: token);
+    this.token = token;
     notifyListeners();
   }
 

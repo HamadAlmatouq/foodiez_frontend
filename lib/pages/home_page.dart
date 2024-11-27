@@ -37,7 +37,7 @@ class HomePage extends StatelessWidget {
                 ListView(
                   padding: EdgeInsets.zero,
                   children: [
-                    const Text("Welcome user"),
+                    Text("Welcome ${provider.user!.username}"),
                     ListTile(
                       title: const Text("Log out"),
                       trailing: const Icon(Icons.how_to_reg),
