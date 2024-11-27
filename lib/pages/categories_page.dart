@@ -34,12 +34,12 @@
 //             ],
 //             begin: Alignment.topCenter,
 //             end: Alignment.bottomCenter,
-//           ), 
+//            ),  
 //         ),
 //         padding: const EdgeInsets.all(16.0),
 //         child: GridView.builder(
 //           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-//             crossAxisCount: 2, // 2 cards per row
+//             crossAx isCo unt: 2, // 2 cards per row
 //             crossAxisSpacing: 10,
 //             mainAxisSpacing: 10,
 //             childAspectRatio: 3 / 4,
@@ -61,7 +61,7 @@
 //               },
 //             );
 //           },
-//         ),
+//         ), 
 //       ),
 //     );
 //   }
@@ -89,6 +89,7 @@
 //   }
 // }
 import 'package:flutter/material.dart';
+import 'package:foodiez_frontend/models/recipe.dart';
 import 'package:foodiez_frontend/pages/widgets/recipe_card.dart';
 import 'package:foodiez_frontend/recipes_data.dart';
 import 'package:foodiez_frontend/pages/recipe_detail_page.dart';
@@ -197,13 +198,14 @@ class CategoryDetailPage extends StatelessWidget {
                     calories: recipe['calories'],
                     likes: recipe['likes'],
                     onTap: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) =>
-                      //         RecipeDetailPage(recipe: recipe),
-                      //   ),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+  builder: (context) => RecipeDetailPage(
+    recipe: Recipe.fromJson(recipe), // Convert the Map to a Recipe object
+  ),
+),
+                      );
                     },
                   );
                 },
