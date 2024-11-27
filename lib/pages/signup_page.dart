@@ -157,8 +157,11 @@ class SignUpPage extends StatelessWidget {
                     if (!_formKey.currentState!.validate()) return;
                     _formKey.currentState!.save();
                     var response = await context.read<AuthProvider>().signup(username: username, password: password);
-                    if (response == "Username is used")
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(response)));
+                    if (response['error'] != null) {
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(response['error']!)));
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Sign up successfully")));
+                    }
                     // if (provider.token[0].isEmpty) {
                     //   GoRouter.of(context).pop();
                     // } else {
@@ -177,31 +180,24 @@ class SignUpPage extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 20),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        context.go('/signin');
-                      },
-                      child: const Text(
-                        "Already have an account? ",
-                        style: TextStyle(color: Color.fromARGB(255, 0, 0, 230)),
-                      ),
-                    ),
-                    // GestureDetector(
-                    //   onTap: () {
-                    //     context.go('/signin');
-                    //   },
-                    //   child: const Text(
-                    //     'Sign up',
-                    //     style: TextStyle(
-                    //       color: Color.fromARGB(255, 0, 102, 255),
-                    //       fontWeight: FontWeight.bold,
-                    //     ),
-                    //   ),
-                    // ),
-                  ],
+                GestureDetector(
+                  onTap: () {
+                    context.go('/signin');
+                  },
+                  child: const Text(
+                    "Already have an account?",
+                    style: TextStyle(color: Color.fromARGB(255, 0, 0, 230)),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                GestureDetector(
+                  onTap: () {
+                    context.push('/test');
+                  },
+                  child: const Text(
+                    "Continue as a Guest",
+                    style: TextStyle(color: Color.fromARGB(255, 0, 0, 230)),
+                  ),
                 ),
               ],
             ),
