@@ -200,13 +200,13 @@ class CategoryDetailPage extends StatelessWidget {
                     calories: recipe['calories'],
                     likes: recipe['likes'],
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              RecipeDetailPage(recipe: recipe),
-                        ),
-                      );
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //     builder: (context) =>
+                      //         RecipeDetailPage(recipe: recipe),
+                      //   ),
+                      // );
                     },
                   );
                 },
