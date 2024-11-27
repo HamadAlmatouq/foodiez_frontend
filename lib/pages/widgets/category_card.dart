@@ -169,6 +169,7 @@ elevation: 3,
                 style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
+                  color: Color(0xFFB39DDB), // Updated text color
                 ),
               ),
             ),
