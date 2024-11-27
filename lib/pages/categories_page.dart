@@ -34,7 +34,7 @@
 //             ],
 //             begin: Alignment.topCenter,
 //             end: Alignment.bottomCenter,
-//           ),
+//           ), 
 //         ),
 //         padding: const EdgeInsets.all(16.0),
 //         child: GridView.builder(
@@ -43,7 +43,7 @@
 //             crossAxisSpacing: 10,
 //             mainAxisSpacing: 10,
 //             childAspectRatio: 3 / 4,
-//           ),
+//           ), 
 //           itemCount: categories.length,
 //           itemBuilder: (context, index) {
 //             final category = categories[index];
@@ -118,7 +118,6 @@ class CategoriesPage extends StatelessWidget {
         backgroundColor: const Color.fromARGB(255, 112, 173, 99),
       ),
       body: Container(
-        // Applying the gradient background to a Container widget
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [
@@ -132,7 +131,7 @@ class CategoriesPage extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: GridView.builder(
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2, // 2 cards per row
+            crossAxisCount: 2,
             crossAxisSpacing: 10,
             mainAxisSpacing: 10,
             childAspectRatio: 3 / 4,
@@ -144,7 +143,6 @@ class CategoriesPage extends StatelessWidget {
               name: category['name'],
               count: category['count'],
               onTap: () {
-                // Navigate to a specific category page
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -168,7 +166,6 @@ class CategoryDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Filter recipes by category
     final categoryRecipes = recipes
         .where((recipe) => categoryName == 'All Recipes' ||
             recipe['category'] == categoryName)

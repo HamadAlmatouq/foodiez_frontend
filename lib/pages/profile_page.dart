@@ -14,7 +14,6 @@ class _ProfilePageState extends State<ProfilePage> {
     {"id": "3", "title": "Berry Smoothie"}
   ];
 
-  // Method to add a new recipe
   void _addRecipe(String title) {
     setState(() {
       recipes.add({"id": (recipes.length + 1).toString(), "title": title});
@@ -30,7 +29,6 @@ class _ProfilePageState extends State<ProfilePage> {
         centerTitle: true,
       ),
       body: Container(
-        // Gradient background
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [
@@ -46,7 +44,6 @@ class _ProfilePageState extends State<ProfilePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Profile Section
               Center(
                 child: Column(
                   children: [
@@ -73,7 +70,6 @@ class _ProfilePageState extends State<ProfilePage> {
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 16),
-              // Recipe Cards
               Expanded(
                 child: ListView.builder(
                   itemCount: recipes.length,
@@ -105,7 +101,6 @@ class _ProfilePageState extends State<ProfilePage> {
                                   icon: const Icon(Icons.edit),
                                   color: Colors.green,
                                   onPressed: () {
-                                    // TODO: Implement Edit functionality
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
                                         content:
@@ -119,7 +114,6 @@ class _ProfilePageState extends State<ProfilePage> {
                                   icon: const Icon(Icons.delete),
                                   color: Colors.red,
                                   onPressed: () {
-                                    // TODO: Implement Delete functionality
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
                                         content:
@@ -141,7 +135,6 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
         ),
       ),
-      // Add Recipe Button (Floating Action Button)
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           _showAddRecipeDialog(context);
@@ -152,7 +145,6 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  // Function to show dialog for adding new recipe
   void _showAddRecipeDialog(BuildContext context) {
     final TextEditingController titleController = TextEditingController();
 

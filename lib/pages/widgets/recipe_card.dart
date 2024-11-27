@@ -100,13 +100,13 @@
 import 'package:flutter/material.dart';
 
 class RecipeCard extends StatelessWidget {
-  final String image; // Asset path for the image
-  final String title; // Title of the recipe
-  final String category; // Recipe category
-  final String chef; // Chef name
-  final int calories; // Calories count
-  final int likes; // Number of likes
-  final VoidCallback onTap; // Action when tapped
+  final String image; 
+  final String title; 
+  final String category; 
+  final String chef; 
+  final int calories; 
+  final int likes; 
+  final VoidCallback onTap; 
 
   const RecipeCard({
     Key? key,
@@ -131,7 +131,6 @@ class RecipeCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Recipe Image
             ClipRRect(
               borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
               child: Image.asset(
@@ -142,7 +141,7 @@ class RecipeCard extends StatelessWidget {
                 errorBuilder: (context, error, stackTrace) {
                   return Container(
                     height: 120,
-                    color: Colors.grey[300], // Fallback background color
+                    color: Colors.grey[300], 
                     alignment: Alignment.center,
                     child: const Icon(
                       Icons.broken_image,
@@ -158,7 +157,6 @@ class RecipeCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Recipe Title
                   Text(
                     title,
                     style: const TextStyle(
@@ -167,7 +165,6 @@ class RecipeCard extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 4),
-                  // Category and Chef
                   Text(
                     '$category • $chef',
                     style: const TextStyle(
@@ -176,7 +173,6 @@ class RecipeCard extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 4),
-                  // Calories and Likes
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [

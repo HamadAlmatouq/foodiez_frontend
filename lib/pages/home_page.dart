@@ -9,13 +9,12 @@ import 'package:foodiez_frontend/pages/recipe_detail_page.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
-  final String? username; // Pass the username to this widget
+  final String? username; 
 
   const HomePage({Key? key, this.username}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // Filter high-rated recipes (rating >= 4.5)
     final highRatedRecipes =
         recipes.where((recipe) => recipe['rating'] >= 4.5).toList();
     return Scaffold(
@@ -39,7 +38,7 @@ class HomePage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 90), // Reduced spacing at the top
+            const SizedBox(height: 90), 
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Column(
@@ -62,10 +61,8 @@ class HomePage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 20),
-                  // SearchBar with white outline
                   const custom.SearchBar(),
                   const SizedBox(height: 20),
-                  // Centered High Rated Recipes with horizontal lines
                   const Row(
                     children: [
                       Expanded(
@@ -97,7 +94,6 @@ class HomePage extends StatelessWidget {
                 ],
               ),
             ),
-            // High-rated recipes grid (Scrollable)
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -108,10 +104,10 @@ class HomePage extends StatelessWidget {
                       builder: (context, provider, child) {
                         return GridView.builder(
                           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2, // Two cards per row
+                            crossAxisCount: 2, 
                             crossAxisSpacing: 10,
                             mainAxisSpacing: 10,
-                            childAspectRatio: 3 / 4, // Adjust aspect ratio to match card dimensions
+                            childAspectRatio: 3 / 4, 
                           ),
                           itemCount: provider.recipes.length,
                           itemBuilder: (context, index) {
@@ -124,8 +120,7 @@ class HomePage extends StatelessWidget {
                               calories: 0,
                               likes: 0,
                               onTap: () {
-                                // Navigate to the RecipeDetailPage
-                                Navigator.push(
+                                Navigator.push( //how about router?
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) =>

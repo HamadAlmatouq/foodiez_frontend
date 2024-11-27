@@ -30,7 +30,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final GoRouter router = GoRouter(
-      initialLocation: '/mainscreen', // Main page
+      initialLocation: '/mainscreen', 
       routes: [
         GoRoute(
           path: '/signin',
@@ -70,26 +70,25 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  int selectedIndex = 0; // Track the selected tab index
+  int selectedIndex = 0; 
 
-  // List of pages for each tab
   final List<Widget> pages = [
-    const HomePage(), // Home page content
-    CategoriesPage(), // Categories page content
-    const FavoritesPage(), // Favorites page content
-    ProfilePage(), // Profile page content
+    const HomePage(), 
+    CategoriesPage(), 
+    const FavoritesPage(), 
+    ProfilePage(), 
   ];
 
   void onItemTapped(int index) {
     setState(() {
-      selectedIndex = index; // Update the selected tab
+      selectedIndex = index; 
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: pages[selectedIndex], // Display the selected page
+      body: pages[selectedIndex], 
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),

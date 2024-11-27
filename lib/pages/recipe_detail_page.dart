@@ -24,7 +24,6 @@ class RecipeDetailPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Recipe Image
               ClipRRect(
                 borderRadius: BorderRadius.circular(12),
                 child: Image.asset(
@@ -35,7 +34,6 @@ class RecipeDetailPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
-              // Title and Chef
               Text(
                 recipe.name,
                 style: const TextStyle(
@@ -48,7 +46,6 @@ class RecipeDetailPage extends StatelessWidget {
                 style: const TextStyle(fontSize: 16, color: Colors.grey),
               ),
               const SizedBox(height: 20),
-              // Description
               const Text(
                 'Description:',
                 style: TextStyle(
@@ -62,7 +59,6 @@ class RecipeDetailPage extends StatelessWidget {
                 style: TextStyle(fontSize: 16),
               ),
               const SizedBox(height: 20),
-              // Ingredients
               const Text(
                 'Ingredients:',
                 style: TextStyle(
@@ -73,7 +69,6 @@ class RecipeDetailPage extends StatelessWidget {
               const SizedBox(height: 8),
               Text(ingredientsList),
               const SizedBox(height: 20),
-              // Steps
               const Text(
                 'Steps:',
                 style: TextStyle(
@@ -86,7 +81,6 @@ class RecipeDetailPage extends StatelessWidget {
                 '1. Step one\n2. Step two\n3. Step three',
               ),
               const SizedBox(height: 20),
-              // Actions
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
