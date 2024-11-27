@@ -86,15 +86,21 @@ class RecipeDetailPage extends StatelessWidget {
                 children: [
                   IconButton(
                     icon: const Icon(Icons.favorite, color: Colors.red),
-                    onPressed: () {},
+                    onPressed: () {
+                      //TODO: Like recipe logic
+                    },
                   ),
                   IconButton(
                     icon: const Icon(Icons.bookmark, color: Colors.blue),
-                    onPressed: () {},
+                    onPressed: () {
+                      // TODO: Save or bookmark logic
+                    },
                   ),
                   IconButton(
                     icon: const Icon(Icons.report, color: Colors.orange),
-                    onPressed: () {},
+                    onPressed: () {
+                      // TODO: Report recipe
+                    },
                   ),
                 ],
               ),

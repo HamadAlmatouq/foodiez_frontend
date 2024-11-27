@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:foodiez_frontend/pages/widgets/categoriesList.dart';
 import 'package:go_router/go_router.dart';
 
 class AddRecipePage extends StatefulWidget {
-  const AddRecipePage({super.key});
+  const AddRecipePage({super.key, this.recipe});
+  final Map<String, dynamic>? recipe;
 
   @override
   State<AddRecipePage> createState() => _AddRecipePageState();
@@ -21,8 +21,15 @@ class _AddRecipePageState extends State<AddRecipePage> {
       TextEditingController();
 
   final List<String> categoryNames = [
-    for (var category in categories)
-      if (category['name'] != 'All Recipes') category['name'] as String
+    'Main Dish',
+    'Side Dish',
+    'Dessert',
+    'Beverages',
+    'Smoothies',
+    'Salad',
+    'Vegan',
+    'Vegetarian',
+    'Keto'
   ];
 
   final Map<String, IconData> categoryIcons = {
@@ -73,11 +80,8 @@ class _AddRecipePageState extends State<AddRecipePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // Recipe Title
-            const Text(
-              'Recipe Title',
-              style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-            ),
+            const Text('Recipe Title',
+                style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
             const SizedBox(height: 8),
             TextField(
               controller: titleController,
@@ -89,12 +93,8 @@ class _AddRecipePageState extends State<AddRecipePage> {
               ),
             ),
             const SizedBox(height: 16),
-
-            // Category Dropdown with Icon
-            const Text(
-              'Category',
-              style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-            ),
+            const Text('Category',
+                style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
             const SizedBox(height: 8),
             DropdownButtonFormField<String>(
               value: selectedCategory,
@@ -121,12 +121,8 @@ class _AddRecipePageState extends State<AddRecipePage> {
               ),
             ),
             const SizedBox(height: 16),
-
-            // Description
-            const Text(
-              'Description',
-              style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-            ),
+            const Text('Description',
+                style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
             const SizedBox(height: 8),
             TextField(
               controller: descriptionController,
@@ -139,16 +135,11 @@ class _AddRecipePageState extends State<AddRecipePage> {
               ),
             ),
             const SizedBox(height: 16),
-
-            // Ingredients
-            const Text(
-              'Ingredients',
-              style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-            ),
+            const Text('Ingredients',
+                style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
             const SizedBox(height: 8),
             Row(
               children: [
-                // Ingredient Dropdown
                 Expanded(
                   flex: 2,
                   child: DropdownButtonFormField<String>(
@@ -182,8 +173,6 @@ class _AddRecipePageState extends State<AddRecipePage> {
                   ),
                 ),
                 const SizedBox(width: 8),
-
-                // Ingredient Amount
                 Expanded(
                   flex: 1,
                   child: TextField(
@@ -196,8 +185,6 @@ class _AddRecipePageState extends State<AddRecipePage> {
                     ),
                   ),
                 ),
-
-                // Add Ingredient Button
                 IconButton(
                   onPressed: addIngredient,
                   icon: const Icon(Icons.add, color: Colors.green),
@@ -205,8 +192,6 @@ class _AddRecipePageState extends State<AddRecipePage> {
               ],
             ),
             const SizedBox(height: 8),
-
-            // Display Ingredients List
             if (ingredients.isNotEmpty)
               Column(
                 children: ingredients.map((ingredient) {
@@ -217,16 +202,11 @@ class _AddRecipePageState extends State<AddRecipePage> {
                 }).toList(),
               ),
             const SizedBox(height: 16),
-
-            // Steps Section
-            const Text(
-              'Steps',
-              style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-            ),
+            const Text('Steps',
+                style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
             const SizedBox(height: 8),
             Row(
               children: [
-                // Step TextField
                 Expanded(
                   child: TextField(
                     controller: stepController,
@@ -238,16 +218,12 @@ class _AddRecipePageState extends State<AddRecipePage> {
                     ),
                   ),
                 ),
-
-                // Add Step Button
                 IconButton(
                   onPressed: addStep,
                   icon: const Icon(Icons.add, color: Colors.green),
                 ),
               ],
             ),
-
-            // Display Steps List
             if (steps.isNotEmpty)
               Column(
                 children: List.generate(
@@ -258,8 +234,6 @@ class _AddRecipePageState extends State<AddRecipePage> {
                 ),
               ),
             const SizedBox(height: 16),
-
-            // Create Recipe Button
             ElevatedButton(
               onPressed: () {
                 if (titleController.text.isNotEmpty &&
@@ -274,7 +248,12 @@ class _AddRecipePageState extends State<AddRecipePage> {
                     'ingredients': ingredients,
                     'steps': steps,
                   };
-                  context.pop(recipe); // Use context.pop to pass data back
+                  //Pass data after pop
+                  context.pop(recipe);
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Please fill all fields')),
+                  );
                 }
               },
               child: const Text('Create Recipe'),

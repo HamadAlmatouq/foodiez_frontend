@@ -9,37 +9,31 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  final List<Map<String, String>> recipes = [
-    {"id": "1", "title": "Avocado Toast"},
-    {"id": "2", "title": "Grilled Chicken Salad"},
-    {"id": "3", "title": "Berry Smoothie"}
-  ];
+  final List<Map<String, dynamic>> recipes = [];
 
-  // Method to add a new recipe
-  void _addRecipe(Map<String, String> recipe) {
+  void _addRecipe(Map<String, dynamic> recipe) {
     setState(() {
       recipes.add({
-        "id": (recipes.length + 1).toString(),
+        "id": recipes.length + 1,
         "title": recipe["title"] ?? "Untitled Recipe",
+        "category": recipe["category"],
+        "description": recipe["description"],
+        "ingredients": recipe["ingredients"],
+        "steps": recipe["steps"]
       });
     });
   }
 
-  // Method to handle editing a recipe
-  void _editRecipe(Map<String, String> recipe) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Edit ${recipe['title']}')),
-    );
+  void _updateRecipe(int index, Map<String, dynamic> updatedRecipe) {
+    setState(() {
+      recipes[index] = updatedRecipe;
+    });
   }
 
-  // Method to handle deleting a recipe
-  void _deleteRecipe(Map<String, String> recipe) {
+  void _deleteRecipe(int index) {
     setState(() {
-      recipes.removeWhere((r) => r['id'] == recipe['id']);
+      recipes.removeAt(index);
     });
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Deleted ${recipe['title']}')),
-    );
   }
 
   @override
@@ -48,10 +42,8 @@ class _ProfilePageState extends State<ProfilePage> {
       appBar: AppBar(
         title: const Text('Profile'),
         backgroundColor: const Color.fromARGB(255, 112, 173, 99),
-        centerTitle: true,
       ),
       body: Container(
-        // Gradient background
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [
@@ -62,102 +54,90 @@ class _ProfilePageState extends State<ProfilePage> {
             end: Alignment.bottomCenter,
           ),
         ),
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Profile Section
-              Center(
-                child: Column(
-                  children: [
-                    ClipOval(
-                      child: Image.asset(
-                        'assets/Images/pfp.jpg',
-                        width: 100,
-                        height: 100,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    const Text(
-                      'Hello, Chef',
-                      style:
-                          TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const SizedBox(height: 16),
+            Center(
+              child: CircleAvatar(
+                radius: 50,
+                backgroundImage: AssetImage('assets/Images/pfp.jpg'),
               ),
-              const SizedBox(height: 24),
-              const Text(
-                'Your Recipes',
+            ),
+            const SizedBox(height: 8),
+            const Center(
+              child: Text(
+                'Hello, Chef',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+              ),
+            ),
+            const SizedBox(height: 16),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: const Text(
+                'Your Recipes:',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                textAlign: TextAlign.left,
               ),
-              const SizedBox(height: 16),
-              // Recipe Cards
-              Expanded(
-                child: ListView.builder(
-                  itemCount: recipes.length,
-                  itemBuilder: (context, index) {
-                    final recipe = recipes[index];
-                    return Card(
-                      elevation: 4,
-                      margin: const EdgeInsets.only(bottom: 16),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
+            ),
+            const SizedBox(height: 16),
+            Expanded(
+              child: ListView.builder(
+                itemCount: recipes.length,
+                itemBuilder: (context, index) {
+                  final recipe = recipes[index];
+                  return Card(
+                    margin:
+                        const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                    child: ListTile(
+                      title: Text(recipe["title"]),
+                      subtitle: Text(recipe["category"]),
+                      onTap: () {
+                        context.push('/recipe/${recipe["id"]}');
+                      },
+                      trailing: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          IconButton(
+                            icon: const Icon(Icons.edit, color: Colors.blue),
+                            onPressed: () async {
+                              final updatedRecipe =
+                                  await context.push<Map<String, dynamic>>(
+                                '/add-recipe',
+                                extra: recipe,
+                              );
+                              if (updatedRecipe != null) {
+                                _updateRecipe(index, updatedRecipe);
+                              }
+                            },
+                          ),
+                          IconButton(
+                            icon: const Icon(Icons.delete, color: Colors.red),
+                            onPressed: () {
+                              _deleteRecipe(index);
+                            },
+                          ),
+                        ],
                       ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            Text(
-                              recipe['title'] ?? 'Untitled Recipe',
-                              style: const TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            const SizedBox(height: 16),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                IconButton(
-                                  icon: const Icon(Icons.edit),
-                                  color: Colors.green,
-                                  onPressed: () => _editRecipe(recipe),
-                                ),
-                                const SizedBox(width: 8),
-                                IconButton(
-                                  icon: const Icon(Icons.delete),
-                                  color: Colors.red,
-                                  onPressed: () => _deleteRecipe(recipe),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  },
-                ),
+                    ),
+                  );
+                },
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
-      // Add Recipe Button (Floating Action Button)
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          // Navigate to AddRecipePage and await the result
-          final newRecipe =
-              await context.push<Map<String, String>>('/add-recipe');
-          if (newRecipe != null) {
-            _addRecipe(newRecipe);
+          final recipe = await context.push<Map<String, dynamic>>(
+            '/add-recipe',
+          );
+          if (recipe != null) {
+            _addRecipe(recipe);
           }
         },
-        child: const Icon(Icons.add),
         backgroundColor: const Color.fromARGB(255, 112, 173, 99),
+        child: const Icon(Icons.add),
       ),
     );
   }
