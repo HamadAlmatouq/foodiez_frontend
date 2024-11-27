@@ -12,17 +12,17 @@ class CategoriesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBodyBehindAppBar: true, // Ensures the background extends behind the AppBar
+      extendBodyBehindAppBar: true, 
       appBar: AppBar(
-        backgroundColor: Colors.transparent, // Transparent AppBar
-        elevation: 0, // Remove shadow
-        centerTitle: true, // Centers the title
+        backgroundColor: Colors.transparent, 
+        elevation: 0, 
+        centerTitle: true, 
         title: const Padding(
-          padding: EdgeInsets.only(top: 20.0), // Pushes text downward
+          padding: EdgeInsets.only(top: 20.0), 
           child: Text(
             'Categories',
             style: TextStyle(
-              color: Colors.white, // Change text color to white
+              color: Colors.white, 
               fontSize: 24,
               fontWeight: FontWeight.bold,
             ),
@@ -31,7 +31,7 @@ class CategoriesPage extends StatelessWidget {
       ),
       body: Stack(
         children: [
-          // Top Background Shape
+          
           ClipPath(
             clipper: TopClipper(),
             child: Container(
@@ -48,7 +48,6 @@ class CategoriesPage extends StatelessWidget {
               ),
             ),
           ),
-          // Bottom Background Shape
           Align(
             alignment: Alignment.bottomRight,
             child: ClipPath(
@@ -69,7 +68,7 @@ class CategoriesPage extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 120.0), // Adjust padding to account for title
+            padding: const EdgeInsets.only(top: 120.0), 
             child: GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
@@ -82,7 +81,7 @@ class CategoriesPage extends StatelessWidget {
                 final category = categories[index];
                 return CategoryCard(
                   name: category['name'],
-                  imagePath: category['image'], // Add image path here
+                  imagePath: category['image'], 
                   onTap: () {
                     Navigator.push(
                       context,
@@ -117,7 +116,7 @@ class CategoryDetailPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(categoryName),
-        backgroundColor: const Color(0xFF70AD63), // Pastel green
+        backgroundColor: const Color(0xFF70AD63), 
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -156,7 +155,6 @@ class CategoryDetailPage extends StatelessWidget {
   }
 }
 
-// Top Clipper
 class TopClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
@@ -177,7 +175,6 @@ class TopClipper extends CustomClipper<Path> {
   bool shouldReclip(covariant CustomClipper<Path> oldClipper) => false;
 }
 
-// Bottom-Right Clipper
 class BottomRightClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {

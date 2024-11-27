@@ -41,7 +41,6 @@ class HomePage extends StatelessWidget {
       ),
       body: Stack(
         children: [
-          // Top Green Shape
           ClipPath(
             clipper: TopClipper(),
             child: Container(
@@ -58,7 +57,6 @@ class HomePage extends StatelessWidget {
               ),
             ),
           ),
-          // Bottom Green Shape
           Positioned(
             bottom: 0,
             left: 0,
@@ -84,7 +82,6 @@ class HomePage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 90),
-              // Carousel Slider
               CarouselSlider(
                 items: carouselImages
                     .map((image) => ClipRRect(
@@ -110,7 +107,6 @@ class HomePage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Dynamic Greeting
                     Text(
                       _getGreeting(),
                       style: const TextStyle(
@@ -137,7 +133,7 @@ class HomePage extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 20),
-                    const custom.SearchBar(), // Search Bar
+                    const custom.SearchBar(), 
                     const SizedBox(height: 30),
                     const Row(
                       children: [
@@ -170,7 +166,6 @@ class HomePage extends StatelessWidget {
                   ],
                 ),
               ),
-              // Popular Recipes Horizontal List
               SizedBox(
                 height: 200,
                 child: FutureBuilder(
@@ -211,7 +206,7 @@ class HomePage extends StatelessWidget {
                   },
                 ),
               ),
-              const Spacer(), // Push content above navigation bar
+              const Spacer(),
             ],
           ),
         ],
@@ -220,7 +215,6 @@ class HomePage extends StatelessWidget {
   }
 }
 
-// Top Clipper
 class TopClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
@@ -241,7 +235,6 @@ class TopClipper extends CustomClipper<Path> {
   bool shouldReclip(covariant CustomClipper<Path> oldClipper) => false;
 }
 
-// Bottom Clipper
 class BottomClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
