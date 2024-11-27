@@ -3,9 +3,11 @@ import 'package:foodiez_frontend/main.dart';
 import 'package:foodiez_frontend/models/recipe.dart';
 import 'package:foodiez_frontend/pages/widgets/search_bar.dart' as custom;
 import 'package:foodiez_frontend/pages/widgets/recipe_card.dart';
+import 'package:foodiez_frontend/providers/auth_provider.dart';
 import 'package:foodiez_frontend/providers/recipe_provider.dart';
 import 'package:foodiez_frontend/recipes_data.dart';
 import 'package:foodiez_frontend/pages/recipe_detail_page.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
@@ -16,13 +18,59 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Filter high-rated recipes (rating >= 4.5)
-    final highRatedRecipes =
-        recipes.where((recipe) => recipe['rating'] >= 4.5).toList();
+    // final highRatedRecipes =
+    //     recipes.where((recipe) => recipe['rating'] >= 4.5).toList();
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
+      ),
+      drawer: Drawer(
+        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+        child: FutureBuilder(
+          future: context.read<AuthProvider>().initAuth(),
+          builder: (context, snapshot) {
+            return Consumer<AuthProvider>(
+              builder: (context, provider, _) {
+                return (provider.isAuth()) ? 
+                ListView(
+                  padding: EdgeInsets.zero,
+                  children: [
+                    const Text("Welcome user"),
+                    ListTile(
+                      title: const Text("Log out"),
+                      trailing: const Icon(Icons.how_to_reg),
+                      onTap: () {
+                        provider.logout();
+                      },
+                    )
+                  ],
+                )
+                :
+                ListView(
+                  padding: EdgeInsets.zero,
+                  children: [
+                    ListTile(
+                      title: const Text("Signin"),
+                      trailing: const Icon(Icons.login),
+                      onTap: () {
+                        GoRouter.of(context).push('/signin');
+                      },
+                    ),
+                    ListTile(
+                      title: const Text("Signup"),
+                      trailing: const Icon(Icons.how_to_reg),
+                      onTap: () {
+                        GoRouter.of(context).push('/signup');
+                      },
+                    )
+                  ],
+                );
+              }
+            );
+          }
+        ),
       ),
       body: Container(
         decoration: const BoxDecoration(
