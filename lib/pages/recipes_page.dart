@@ -15,7 +15,7 @@ class RecipesPage extends StatelessWidget {
     {
       'image': 'https://via.placeholder.com/150',
       'title': 'Caesar Salad',
-      'category': 'Salad',
+      'category': 'MainDish',
       'chef': 'Chef Anna',
       'calories': 300,
       'likes': 85,
@@ -23,7 +23,7 @@ class RecipesPage extends StatelessWidget {
     {
       'image': 'https://via.placeholder.com/150',
       'title': 'Chocolate Cake',
-      'category': 'Dessert',
+      'category': 'MainDish',
       'chef': 'Chef Clara',
       'calories': 450,
       'likes': 200,

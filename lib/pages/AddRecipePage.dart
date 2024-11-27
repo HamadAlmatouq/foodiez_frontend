@@ -22,11 +22,11 @@ class _AddRecipePageState extends State<AddRecipePage> {
 
   final List<String> categoryNames = [
     'Main Dish',
-    'Side Dish',
+    //'Side Dish',
     'Dessert',
     'Beverages',
     'Smoothies',
-    'Salad',
+    //'snacks',
     'Vegan',
     'Vegetarian',
     'Keto'
@@ -34,11 +34,11 @@ class _AddRecipePageState extends State<AddRecipePage> {
 
   final Map<String, IconData> categoryIcons = {
     'Main Dish': Icons.restaurant,
-    'Side Dish': Icons.fastfood,
+    //'Side Dish': Icons.fastfood,
     'Dessert': Icons.cake,
     'Beverages': Icons.local_drink,
     'Smoothies': Icons.local_cafe,
-    'Salad': Icons.grass,
+    //'snacks': Icons.grass,
     'Vegan': Icons.nature_people,
     'Vegetarian': Icons.restaurant_menu,
     'Keto': Icons.local_dining,
