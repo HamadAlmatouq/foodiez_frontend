@@ -161,6 +161,7 @@ class SignUpPage extends StatelessWidget {
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(response['error']!)));
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Sign up successfully")));
+                      context.go('/mainscreen');
                     }
                     // if (provider.token[0].isEmpty) {
                     //   GoRouter.of(context).pop();
@@ -192,7 +193,7 @@ class SignUpPage extends StatelessWidget {
                 const SizedBox(height: 20),
                 GestureDetector(
                   onTap: () {
-                    context.push('/test');
+                    context.go('/mainscreen');
                   },
                   child: const Text(
                     "Continue as a Guest",

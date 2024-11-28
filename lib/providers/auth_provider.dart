@@ -6,7 +6,7 @@ import 'package:foodiez_frontend/services/client.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthProvider extends ChangeNotifier {
-  String token = ""; //"error", "email", "token"
+  String? token; //"error", "email", "token"
   User? user;
 
   Future<Map<String, String>> signup({required String username, required String password}) async {
@@ -19,21 +19,25 @@ class AuthProvider extends ChangeNotifier {
     return response;
   }
 
-  Future<String> signin({required String username, required String password}) async {
-    token = await AuthServices().signin(user: User(username: username, password: password));
+  Future<Map<String, String>> signin({required String username, required String password}) async {
+    var response = await AuthServices().signin(user: User(username: username, password: password));
     // this.user = user;
-    _setToken(username, token);
+    if (response['token'] != null) {
+      _setToken(username, response['token']!);
+    }
     // print(token);
-    user = User(username: username, password: password);
     notifyListeners();
-    return token;
+    return response;
   }
 
   bool isAuth() {
-    return (user != null && token.isEmpty);
+    // print(user ?? 'No User');
+    // print(token ?? 'No token');
+    return (user != null && token != null);
   }
 
   Future<void> initAuth() async {
+    print("initAuth");
     await _getToken();
     if (isAuth()) {
       Client.dio.options.headers = {
@@ -47,7 +51,10 @@ class AuthProvider extends ChangeNotifier {
 
   void _setToken(String username, String token) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    this.token = token; 
+    user = User(username: username, password: token);
     prefs.setString("username", username);
+    // prefs.setString("password", username);
     prefs.setString("token", token);
     notifyListeners();
   }
@@ -60,6 +67,7 @@ class AuthProvider extends ChangeNotifier {
     if (username == null || token == null) return;
 
     user = User(username: username, password: token);
+    this.token = token;
     notifyListeners();
   }
 
@@ -68,6 +76,7 @@ class AuthProvider extends ChangeNotifier {
     prefs.remove('username');
     prefs.remove('token');
     user = null;
+    token = null;
     notifyListeners();
   }
 }

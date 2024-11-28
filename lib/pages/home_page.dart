@@ -2,8 +2,10 @@
 import 'package:flutter/material.dart';
 import 'package:foodiez_frontend/pages/widgets/search_bar.dart' as custom;
 import 'package:foodiez_frontend/pages/widgets/recipe_card.dart';
+import 'package:foodiez_frontend/providers/auth_provider.dart';
 import 'package:foodiez_frontend/providers/recipe_provider.dart';
 import 'package:foodiez_frontend/pages/recipe_detail_page.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
@@ -38,6 +40,52 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
+      ),
+      drawer: Drawer(
+        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+        child: FutureBuilder(
+          future: context.read<AuthProvider>().initAuth(),
+          builder: (context, snapshot) {
+            return Consumer<AuthProvider>(
+              builder: (context, provider, _) {
+                return (provider.isAuth()) ? 
+                ListView(
+                  padding: EdgeInsets.zero,
+                  children: [
+                    Text("Welcome ${provider.user!.username}"),
+                    ListTile(
+                      title: const Text("Log out"),
+                      trailing: const Icon(Icons.how_to_reg),
+                      onTap: () {
+                        provider.logout();
+                      },
+                    )
+                  ],
+                )
+                :
+                ListView(
+                  padding: EdgeInsets.zero,
+                  children: [
+                    ListTile(
+                      title: const Text("Signin"),
+                      trailing: const Icon(Icons.login),
+                      onTap: () {
+                        GoRouter.of(context).push('/signin');
+                      },
+                    ),
+                    ListTile(
+                      title: const Text("Signup"),
+                      trailing: const Icon(Icons.how_to_reg),
+                      onTap: () {
+                        GoRouter.of(context).push('/signup');
+                      },
+                    )
+                  ],
+                );
+              }
+            );
+          }
+        ),
       ),
       body: Stack(
         children: [
@@ -169,7 +217,7 @@ class HomePage extends StatelessWidget {
               SizedBox(
                 height: 200,
                 child: FutureBuilder(
-                  future: context.read<RecipesProvider>().getRecipes(),
+                  future: Provider.of<RecipesProvider>(context, listen: false).getRecipes(),
                   builder: (context, dataSnapshot) {
                     return Consumer<RecipesProvider>(
                       builder: (context, provider, child) {
@@ -199,7 +247,7 @@ class HomePage extends StatelessWidget {
                                 },
                               ),
                             );
-                          },
+                          }
                         );
                       },
                     );

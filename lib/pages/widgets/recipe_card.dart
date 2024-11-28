@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class RecipeCard extends StatelessWidget {
-  final String image; 
+  String? image; 
   final String title; 
   final String category; 
   final String chef; 
@@ -9,9 +9,9 @@ class RecipeCard extends StatelessWidget {
   final int likes; 
   final VoidCallback onTap; 
 
-  const RecipeCard({
+  RecipeCard({
     Key? key,
-    required this.image,
+    this.image,
     required this.title,
     required this.category,
     required this.chef,
@@ -34,7 +34,8 @@ class RecipeCard extends StatelessWidget {
           children: [
             ClipRRect(
               borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
-              child: Image.asset(
+              child: (image == null || image!.isEmpty) ?
+              Image.asset(
                 'assets/Images/placeholder.png',
                 height: 120,
                 width: double.infinity,
@@ -51,7 +52,26 @@ class RecipeCard extends StatelessWidget {
                     ),
                   );
                 },
-              ),
+              )
+              :
+              Image.network(
+                image!,
+                height: 120,
+                width: double.infinity,
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) {
+                  return Container(
+                    height: 120,
+                    color: Colors.grey[300], 
+                    alignment: Alignment.center,
+                    child: const Icon(
+                      Icons.broken_image,
+                      size: 50,
+                      color: Colors.grey,
+                    ),
+                  );
+                },
+              )
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),

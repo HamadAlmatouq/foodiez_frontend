@@ -13,7 +13,7 @@ class RecipesProvider extends ChangeNotifier {
 
   void createRecipe(Recipe recipe) async {
     Recipe newRecipe = await DioClient().createRecipe(recipe: recipe);
-    recipes.insert(0, newRecipe);
+    recipes.add(newRecipe);
     notifyListeners();
   }
 
@@ -24,7 +24,7 @@ class RecipesProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void deleteRecipe(int recipeId) async {
+  void deleteRecipe(String recipeId) async {
     await DioClient().deleteRecipe(recipeId: recipeId);
     recipes.removeWhere((recipe) => recipe.id == recipeId);
     notifyListeners();

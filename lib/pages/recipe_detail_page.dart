@@ -12,6 +12,12 @@ class RecipeDetailPage extends StatelessWidget {
     for (var ingredient in recipe.ingredients) {
       ingredientsList += '- $ingredient \n';
     }
+    String steps = '';
+    if (recipe.steps != null) {
+      for (var step in recipe.steps!) {
+        steps += '- $step \n';
+      }
+    }
     // print(ingredientsList);
     return Scaffold(
       appBar: AppBar(
@@ -25,14 +31,46 @@ class RecipeDetailPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ClipRRect(
-                borderRadius: BorderRadius.circular(12),
-                child: Image.asset(
-                  'assets/Images/placeholder.png',
-                  height: 200,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
-                ),
-              ),
+              borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
+              child: (recipe.image == null) ?
+              Image.asset(
+                'assets/Images/placeholder.png',
+                height: 120,
+                width: double.infinity,
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) {
+                  return Container(
+                    height: 120,
+                    color: Colors.grey[300], 
+                    alignment: Alignment.center,
+                    child: const Icon(
+                      Icons.broken_image,
+                      size: 50,
+                      color: Colors.grey,
+                    ),
+                  );
+                },
+              )
+              :
+              Image.network(
+                recipe.image!,
+                height: 120,
+                width: double.infinity,
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) {
+                  return Container(
+                    height: 120,
+                    color: Colors.grey[300], 
+                    alignment: Alignment.center,
+                    child: const Icon(
+                      Icons.broken_image,
+                      size: 50,
+                      color: Colors.grey,
+                    ),
+                  );
+                },
+              )
+            ),
               const SizedBox(height: 20),
               Text(
                 recipe.name,
@@ -54,9 +92,9 @@ class RecipeDetailPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 8),
-              const Text(
-                'This is a delicious recipe that you will love!',
-                style: TextStyle(fontSize: 16),
+              Text(
+                recipe.description ?? "no description",
+                style: const TextStyle(fontSize: 16),
               ),
               const SizedBox(height: 20),
               const Text(
@@ -77,8 +115,8 @@ class RecipeDetailPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 8),
-              const Text(
-                '1. Step one\n2. Step two\n3. Step three',
+              Text(
+                (steps.isEmpty) ? "no steps" : steps,
               ),
               const SizedBox(height: 20),
               Row(

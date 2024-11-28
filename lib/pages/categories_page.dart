@@ -142,8 +142,9 @@ class CategoryDetailPage extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) =>
-                              RecipeDetailPage(recipe: Recipe.fromJson(recipe)),
+                          builder: (context) => RecipeDetailPage(
+                            recipe: Recipe.fromJson(recipe), // Convert the Map to a Recipe object
+                          ),
                         ),
                       );
                     },

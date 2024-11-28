@@ -14,18 +14,16 @@ class AuthServices {
     }
   }
 
-  Future<String> signin({required User user}) async {
-    late String token;
+  Future<Map<String, String>> signin({required User user}) async {
     try {
       // print(user.toJson());
       Response response =
           await Client.dio.post('/signin', data: user.toJson());
-      token = response.data["token"];
+      return {'token': response.data["token"]};
       // print(token);
     } on DioException catch (error) {
       print(error.response!);
-      return error.response!.data["error"]["message"];
+      return {'error': error.response!.data["error"]["message"]};
     }
-    return token;
   }
 }

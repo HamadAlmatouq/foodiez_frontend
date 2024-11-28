@@ -1,5 +1,5 @@
 class User {
-  int? id;
+  String? id;
   String username;
   String? password;
 
@@ -10,7 +10,7 @@ class User {
   });
 
   User.fromJson(Map<String, dynamic> json)
-      : id = json['id'] as int?,
+      : id = json['id'] as String?,
         username = json['username'] as String,
         password = json['password'] as String;
         
