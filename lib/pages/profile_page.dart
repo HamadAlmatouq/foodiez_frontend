@@ -77,7 +77,7 @@ class _ProfilePageState extends State<ProfilePage> {
             child: ClipPath(
               clipper: BottomRightClipper(),
               child: Container(
-                height: MediaQuery.of(context).size.height * 0.3,
+                height: MediaQuery.of(context).size.height * 0.2,
                 decoration: const BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
@@ -205,8 +205,8 @@ class TopClipper extends CustomClipper<Path> {
     final path = Path();
     path.lineTo(0, size.height);
     path.quadraticBezierTo(
-      size.width / 2,
-      size.height - 100,
+      size.width / 50,
+      size.height - 50,
       size.width,
       size.height,
     );
@@ -225,7 +225,7 @@ class BottomRightClipper extends CustomClipper<Path> {
   Path getClip(Size size) {
     final path = Path();
     path.moveTo(size.width, 0);
-    path.quadraticBezierTo(size.width - 50, size.height / 2, 0, size.height);
+    path.quadraticBezierTo(size.width - 500, size.height / 2, 0, size.height);
     path.lineTo(size.width, size.height);
     path.close();
     return path;

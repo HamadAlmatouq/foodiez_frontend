@@ -162,8 +162,8 @@ class TopClipper extends CustomClipper<Path> {
     final path = Path();
     path.lineTo(0, size.height);
     path.quadraticBezierTo(
-      size.width / 100,
-      size.height - 100,
+      size.width / 1,
+      size.height - 9,
       size.width /1,
       size.height -300,
     );
@@ -180,8 +180,8 @@ class BottomRightClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
     final path = Path();
-    path.moveTo(size.width, 30);
-    path.quadraticBezierTo(size.width - 10, size.height / 22, 0, size.height);
+    path.moveTo(size.width, 2);
+    path.quadraticBezierTo(size.width - 1000, size.height / 3000, 0, size.height);
     path.lineTo(size.width, size.height);
     path.close();
     return path;

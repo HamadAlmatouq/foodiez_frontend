@@ -55,7 +55,7 @@ class SignUpPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
                 Text(
-                  'Join Us, Foodie!',
+                  'Join Us!',
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                         fontWeight: FontWeight.bold,

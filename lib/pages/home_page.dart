@@ -99,7 +99,7 @@ class HomePage extends StatelessWidget {
                   autoPlay: true,
                   enlargeCenterPage: true,
                   aspectRatio: 16 / 9,
-                  autoPlayInterval: const Duration(seconds: 3),
+                  autoPlayInterval: const Duration(seconds: 4),
                 ),
               ),
               const SizedBox(height: 20),

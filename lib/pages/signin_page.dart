@@ -52,7 +52,7 @@ class SignInPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
                 Text(
-                  'Welcome Back, Foodie!',
+                  'Welcome Back!',
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                         fontWeight: FontWeight.bold,
