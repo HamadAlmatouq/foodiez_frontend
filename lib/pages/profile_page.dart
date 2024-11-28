@@ -47,6 +47,54 @@ class _ProfilePageState extends State<ProfilePage> {
         title: const Text('Profile'),
         backgroundColor: const Color.fromARGB(255, 112, 173, 99),
       ),
+      drawer: SafeArea(
+        child: Drawer(
+          backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+          child: FutureBuilder(
+            future: context.read<AuthProvider>().initAuth(),
+            builder: (context, snapshot) {
+              return Consumer<AuthProvider>(
+                builder: (context, provider, _) {
+                  return (provider.isAuth()) ? 
+                  ListView(
+                    padding: EdgeInsets.zero,
+                    children: [
+                      Text("Welcome ${provider.user!.username}"),
+                      ListTile(
+                        title: const Text("Log out"),
+                        trailing: const Icon(Icons.how_to_reg),
+                        onTap: () {
+                          provider.logout();
+                        },
+                      )
+                    ],
+                  )
+                  :
+                  ListView(
+                    padding: EdgeInsets.zero,
+                    children: [
+                      ListTile(
+                        title: const Text("Signin"),
+                        trailing: const Icon(Icons.login),
+                        onTap: () {
+                          GoRouter.of(context).push('/signin');
+                        },
+                      ),
+                      ListTile(
+                        title: const Text("Signup"),
+                        trailing: const Icon(Icons.how_to_reg),
+                        onTap: () {
+                          GoRouter.of(context).push('/signup');
+                        },
+                      )
+                    ],
+                  );
+                }
+              );
+            }
+          ),
+        ),
+      ),
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(

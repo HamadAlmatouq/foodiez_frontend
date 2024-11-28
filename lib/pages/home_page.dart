@@ -27,7 +27,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final highRatedRecipes = context.watch<RecipesProvider>().recipes;
+    // final highRatedRecipes = context.watch<RecipesProvider>().recipes;
     final List<String> carouselImages = [
       'assets/Images/IMG_8516.jpg',
       'assets/Images/IMG_8518.jpg',
@@ -40,52 +40,6 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-      ),
-      drawer: Drawer(
-        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-        child: FutureBuilder(
-          future: context.read<AuthProvider>().initAuth(),
-          builder: (context, snapshot) {
-            return Consumer<AuthProvider>(
-              builder: (context, provider, _) {
-                return (provider.isAuth()) ? 
-                ListView(
-                  padding: EdgeInsets.zero,
-                  children: [
-                    Text("Welcome ${provider.user!.username}"),
-                    ListTile(
-                      title: const Text("Log out"),
-                      trailing: const Icon(Icons.how_to_reg),
-                      onTap: () {
-                        provider.logout();
-                      },
-                    )
-                  ],
-                )
-                :
-                ListView(
-                  padding: EdgeInsets.zero,
-                  children: [
-                    ListTile(
-                      title: const Text("Signin"),
-                      trailing: const Icon(Icons.login),
-                      onTap: () {
-                        GoRouter.of(context).push('/signin');
-                      },
-                    ),
-                    ListTile(
-                      title: const Text("Signup"),
-                      trailing: const Icon(Icons.how_to_reg),
-                      onTap: () {
-                        GoRouter.of(context).push('/signup');
-                      },
-                    )
-                  ],
-                );
-              }
-            );
-          }
-        ),
       ),
       body: Stack(
         children: [
@@ -165,7 +119,7 @@ class HomePage extends StatelessWidget {
                     ),
                     const SizedBox(height: 0),
                     Text(
-                      username ?? 'Abdulwahab 💪🏻',
+                      username ?? 'Guest 💪🏻',
                       style: const TextStyle(
                         fontSize: 28,
                         fontWeight: FontWeight.w500,
@@ -214,47 +168,54 @@ class HomePage extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(
-                height: 200,
-                child: FutureBuilder(
-                  future: Provider.of<RecipesProvider>(context, listen: false).getRecipes(),
-                  builder: (context, dataSnapshot) {
-                    return Consumer<RecipesProvider>(
-                      builder: (context, provider, child) {
-                        return ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: provider.recipes.length,
-                          itemBuilder: (context, index) {
-                            final recipe = provider.recipes[index];
-                            return Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 8.0),
-                              child: RecipeCard(
-                                image: recipe.image ?? 'assets/Images/D1.png',
-                                title: recipe.name,
-                                category: recipe.category,
-                                chef: recipe.username,
-                                calories: 0,
-                                likes: 0,
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          RecipeDetailPage(recipe: recipe),
-                                    ),
-                                  );
-                                },
-                              ),
-                            );
-                          }
-                        );
-                      },
-                    );
-                  },
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: FutureBuilder(
+                    future: Provider.of<RecipesProvider>(context, listen: false).getRecipes(),
+                    builder: (context, dataSnapshot) {
+                      return Consumer<RecipesProvider>(
+                        builder: (context, provider, child) {
+                          return Consumer<RecipesProvider>(
+                            builder: (context, provider, child) {
+                              return GridView.builder(
+                                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2, 
+                                  crossAxisSpacing: 10,
+                                  mainAxisSpacing: 10,
+                                  childAspectRatio: 3 / 4, 
+                                ),
+                                itemCount: provider.recipes.length,
+                                itemBuilder: (context, index) {
+                                  final recipe = provider.recipes[index];
+                                  return RecipeCard(
+                                    image: recipe.image,
+                                    title: recipe.name,
+                                    category: recipe.category,
+                                    chef: recipe.username,
+                                    calories: 0,
+                                    likes: 0,
+                                    onTap: () {
+                                      Navigator.push( //how about router?
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              RecipeDetailPage(recipe: recipe),
+                                      ),
+                                    );
+                                  },
+                                );
+                                }
+                              );
+                            }
+                          );
+                        },
+                      );
+                    },
+                  ),
                 ),
               ),
-              const Spacer(),
+              // const Spacer(),
             ],
           ),
         ],
