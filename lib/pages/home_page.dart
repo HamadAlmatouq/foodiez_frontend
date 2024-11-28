@@ -29,10 +29,9 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     // final highRatedRecipes = context.watch<RecipesProvider>().recipes;
     final List<String> carouselImages = [
-      'assets/Images/IMG_8516.jpg',
-      'assets/Images/IMG_8518.jpg',
-      //ß'assets/Images/IMG_8522.jpg',
-      'assets/Images/IMG_8523.jpg',
+      'assets/Images/IMG_8526.jpg',
+      'assets/Images/Screenshot 2024-11-28 at 8.46.07 AM.png',
+      'assets/Images/IMG_8536.jpg',
     ];
 
     return Scaffold(
