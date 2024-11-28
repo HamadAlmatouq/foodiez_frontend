@@ -93,7 +93,7 @@ class HomePage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Good morning ...\n ${username ?? 'Abdulwahab 💪🏻'}',
+                    'Good morning ...\n ${username ?? 'Guest 💪🏻'}',
                     style: const TextStyle(
                       fontSize: 32,
                       fontWeight: FontWeight.bold,
