@@ -117,14 +117,14 @@ class HomePage extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 0),
-                    Text(
-                      username ?? 'Guest 💪🏻',
-                      style: const TextStyle(
-                        fontSize: 28,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.white,
-                      ),
-                    ),
+                    // Text(
+                    //   username ?? 'Guest 💪🏻',
+                    //   style: const TextStyle(
+                    //     fontSize: 28,
+                    //     fontWeight: FontWeight.w500,
+                    //     color: Colors.white,
+                    //   ),
+                    // ),
                     const SizedBox(height: 10),
                     const Text(
                       'Explore new healthy recipes',

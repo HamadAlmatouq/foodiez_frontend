@@ -56,14 +56,15 @@ class MainApp extends StatelessWidget {
           path: '/add-recipe',
           builder: (context, state) => AddRecipePage(),
         ),
-        // GoRoute(
-        //   path: '/recipe/:id',
-        //   builder: (context, state) {
-        //     final id = int.parse(state.pathParameters['id']!);
-        //     final recipe = recipes.firstWhere((recipe) => recipe['id'] == id);
-        //     return RecipeDetailPage(recipe: recipe);
-        //   },
-        // ),
+        GoRoute(
+          path: '/recipe/:id',
+          builder: (context, state) {
+            final id = int.parse(state.pathParameters['id']!);
+            final recipe = recipes.firstWhere((recipe) => recipe['id'] == id);
+            return RecipeDetailPage(recipe: Recipe.fromJson(recipe));
+            
+          },
+        ),
       ],
     );
     /*
@@ -96,7 +97,7 @@ class _MainScreenState extends State<MainScreen> {
   final List<Widget> pages = [
     const HomePage(), 
     CategoriesPage(), 
-    const FavoritesPage(), 
+    // const FavoritesPage(), 
     ProfilePage(), 
   ];
 
@@ -115,8 +116,8 @@ class _MainScreenState extends State<MainScreen> {
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(
               icon: Icon(Icons.grid_view), label: 'Categories'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.favorite), label: 'Favorites'),
+          // BottomNavigationBarItem(
+          //     icon: Icon(Icons.favorite), label: 'Favorites'),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
         ],
         currentIndex: selectedIndex,
