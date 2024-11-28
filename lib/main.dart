@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodiez_frontend/models/recipe.dart';
 import 'package:foodiez_frontend/pages/addRecipePage.dart';
 import 'package:foodiez_frontend/pages/home_page.dart';
 import 'package:foodiez_frontend/pages/recipe_detail_page.dart';
@@ -65,6 +66,15 @@ class MainApp extends StatelessWidget {
         // ),
       ],
     );
+    /*
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+  builder: (context) => RecipeDetailPage(
+    recipe: Recipe.fromJson(recipe), // Convert the Map to a Recipe object
+  ),
+),
+    */
 
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,

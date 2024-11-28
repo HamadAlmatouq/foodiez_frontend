@@ -26,9 +26,9 @@ class RecipeList extends StatelessWidget {
               ),
             ],
           ),
-          child: Column(
+          child: const Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
+            children: [
               Icon(Icons.fastfood, size: 40, color: Colors.green),
               SizedBox(height: 10),
               Text('Recipe Name', style: TextStyle(fontWeight: FontWeight.bold)),
